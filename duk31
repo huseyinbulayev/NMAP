@@ -1,0 +1,154 @@
+#!/bin/bash
+
+RED="\e[31m"
+GREEN="\e[32m"
+RESET="\e[0m"
+
+clear
+
+echo -ne "${RED}"
+cat << "EOF"
+                           .         .                                                
+b.             8          ,8.       ,8.                   .8.          8 888888888o   
+888o.          8         ,888.     ,888.                 .888.         8 8888    `88. 
+Y88888o.       8        .`8888.   .`8888.               :88888.        8 8888     `88 
+.`Y888888o.    8       ,8.`8888. ,8.`8888.             . `88888.       8 8888     ,88 
+8o. `Y888888o. 8      ,8'8.`8888,8^8.`8888.           .8. `88888.      8 8888.   ,88' 
+8`Y8o. `Y88888o8     ,8' `8.`8888' `8.`8888.         .8`8. `88888.     8 888888888P'  
+8   `Y8o. `Y8888    ,8'   `8.`88'   `8.`8888.       .8' `8. `88888.    8 8888         
+8      `Y8o. `Y8   ,8'     `8.`'     `8.`8888.     .8'   `8. `88888.   8 8888         
+8         `Y8o.`  ,8'       `8        `8.`8888.   .888888888. `88888.  8 8888         
+8            `Yo ,8'         `         `8.`8888. .8'       `8. `88888. 8 8888         
+EOF
+for ((i=0; i<${#text}; i++)); do
+    echo -ne "${text:$i:1}"
+    sleep 1
+done
+echo -e "${RESET}"
+sleep 2
+echo ""
+
+lines=(
+"[+] Initializing modules"
+"[+] Loading exploits"
+"[+] Loading auxiliary modules"
+"[+] Loading payloads"
+"[+] Loading encoders"
+"[+] Loading nops"
+"[+] Starting nmap"
+)
+
+for line in "${lines[@]}"; do
+    echo -ne "${GREEN}$line${RESET}"
+    sleep 0.2
+    echo "  ✔"
+    sleep 0.1
+done
+
+echo -e "${RED}"
+cat << "EOF"
+                       (###            
+                       ###              
+                     ####               
+                    ###,                
+             ###.  ###                  
+              *######                   
+                ####
+EOF
+sleep 1
+clear
+
+# 1 saniyəlik ASCII banner
+echo -e "${RED}"
+cat << "EOF"
+       _..----.._
+    _-'_..----.._'-_
+  .'.  \       ( `'.'.
+ / / `\ `\       )  \ \
+| |   _`\ `\____(    | |
+| |  [__]_\ `\__()   | |	SMOKE HARMFUL FOR U !!!
+| |        `\ `\     | |
+ \ \         `\ `\  / /
+  '.'-._       `\ `'.'
+    `-._`'----'`_.-'
+        `"----"`
+
+EOF
+echo -e "${RESET}"
+
+sleep 2
+
+clear
+
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+WHITE='\033[1;37m'
+GREEN='\033[1;32m'
+
+
+clear
+
+echo -e "${RED}"
+cat << "EOF"
+ ▄▀▀▄ ▀▄  ▄▀▀▄ ▄▀▄  ▄▀▀█▄   ▄▀▀▄▀▀▀▄ 
+█  █ █ █ █  █ ▀  █ ▐ ▄▀ ▀▄ █   █   █ 
+▐  █  ▀█ ▐  █    █   █▄▄▄█ ▐  █▀▀▀▀  
+  █   █    █    █   ▄▀   █    █      
+▄▀   █   ▄▀   ▄▀   █   ▄▀   ▄▀       
+█    ▐   █    █    ▐   ▐   █         
+▐        ▐    ▐            ▐     
+EOF
+echo -e "${GREEN}         v1.0 - By Duk3${RESET}"
+echo -e "${RED}-----------------------------------------${RESET}"
+
+# Hədəf təyini
+echo -e "${WHITE}[+] Hədəf IP və ya Host daxil et: ${RESET}"
+read -p "root@kali:~# " target
+
+# Menyu Seçimləri (Siyahı şəklində)
+echo -e "${RED}-----------------------------------------${RESET}"
+echo -e "${CYAN}[1]${WHITE} Port Scan (Fast)"
+echo -e "${CYAN}[2]${WHITE} Service & Version Info (-sV)"
+echo -e "${CYAN}[3]${WHITE} OS Detection (-O)"
+echo -e "${CYAN}[4]${WHITE} Aggressive Scan (-A)"
+echo -e "${CYAN}[5]${WHITE} Vulnerability Scan (--script vuln)"
+echo -e "${CYAN}[0]${WHITE} Exit"
+echo -e "${RED}-----------------------------------------${RESET}"
+
+# Seçim Sorğusu
+read -p "Seçimini et [0-5]: " secim
+
+echo -e "${RED}-----------------------------------------${RESET}"
+
+case $secim in
+    1)
+        echo -e "${GREEN}[*] Sürətli skan edilir: $target ...${RESET}"
+        nmap -F $target
+        ;;
+    2)
+        echo -e "${GREEN}[*] Versiyalar yoxlanılır: $target ...${RESET}"
+        nmap -sV $target
+        ;;
+    3)
+        echo -e "${GREEN}[*] Əməliyyat sistemi axtarılır (sudo)...${RESET}"
+        sudo nmap -O $target
+        ;;
+    4)
+        echo -e "${GREEN}[*] Tam (Aqressiv) analiz edilir...${RESET}"
+        nmap -A $target
+        ;;
+    5)
+        echo -e "${GREEN}[*] Zəifliklər yoxlanılır (NSE Script)...${RESET}"
+        nmap --script vuln $target
+        ;;
+    0)
+        echo -e "${RED}[!] Çıxış edildi.${RESET}"
+        exit 0
+        ;;
+    *)
+        echo -e "${RED}[!] Səhv seçim!${RESET}"
+        ;;
+esac
+
+echo -e "${RED}-----------------------------------------${RESET}"
